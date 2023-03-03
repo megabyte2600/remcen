@@ -1,0 +1,26 @@
+barque:/usr/local/FreePort/bin/shells.old(35)# cat BBmenu.90
+#! /bin/sh
+# Copyright 1991 Case Western Reserve University. All Rights Reserved.
+IFS='
+'
+
+#eval `/usr/ucb/tset -s -Q`
+
+. /usr/local/FreePort/bin/shconfig.sh
+
+PATH=${BINDIR}:/usr/local/bin:/usr/ucb:/bin:/usr/bin
+LOGNAME=`whoami`
+SHELL=`egrep "^${LOGNAME}:" /etc/passwd | awk -F: '{print $7}'`
+#SHELL=${BINDIR}/BBmenu
+TERM=vt100
+TERMCAP=
+umask 22
+stty -parenb cs8
+stty new crt
+stty susp u
+stty dsusp u
+
+export PATH TERMCAP SHELL TERM HOME USER
+
+exec menu ${DEFAULT_MENU_PATH}
+exit 0
